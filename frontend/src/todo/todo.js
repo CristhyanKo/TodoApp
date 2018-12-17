@@ -22,16 +22,19 @@ class Todo extends Component {
         this.handleRemove = this.handleRemove.bind(this)
         this.handleMarkAsDone = this.handleMarkAsDone.bind(this)
         this.handleMarkAsPending = this.handleMarkAsPending.bind(this)
+        this.handleSearch = this.handleSearch.bind(this)
+        this.handleClear = this.handleClear.bind(this)
         this.refresh = this.refresh.bind(this)
 
         this.refresh()
     }
 
-    refresh(){
-        axios.get(`${URL}?sort=-createAt`).then((resp) => {
+    refresh(description = ''){
+        const search = description ? `&description__regex=/${description}/` : ''
+        axios.get(`${URL}?sort=-createAt${search}`).then((resp) => {
             this.setState({
                 ...this.state,
-                description: '',
+                description: description,
                 list: resp.data
             })
         })
@@ -48,19 +51,20 @@ class Todo extends Component {
         console.log('erro')
         axios.delete(`${URL}/${data._id}`).then((resp) => {
             message.success('Tarefa excluida com sucesso!')
-            this.refresh()
+            this.refresh(this.state.description)
          })
     }   
 
     handleMarkAsDone(data){
         axios.put(`${URL}/${data._id}`, { ...data, done: true }).then((resp) => {
-            this.refresh()
+            message.success('Tarefa finalizada com sucesso!')
+            this.refresh(this.state.description)
          })
     } 
 
     handleMarkAsPending(data){
         axios.put(`${URL}/${data._id}`, { ...data, done: false }).then((resp) => {
-            this.refresh()
+            this.refresh(this.state.description)
          })
     } 
 
@@ -71,11 +75,19 @@ class Todo extends Component {
         })
     }
 
+    handleSearch(){
+        this.refresh(this.state.description)
+    }
+
+    handleClear(){
+        this.refresh()
+    }
+
     render() {
         return (
             <div>
                 <PageHeader name='Tarefas' small='Cadastro' />
-                <TodoForm description={this.state.description} handleAdd={this.handleAdd} handleChange={this.handleChange} />
+                <TodoForm description={this.state.description} handleAdd={this.handleAdd} handleChange={this.handleChange} handleClear={this.handleClear} handleSearch={this.handleSearch} />
                 <br/>
                 <TodoList 
                     data={this.state.list}

@@ -6,3 +6,7 @@
 .todoActions {
     width: 130px;
 }
+
+.whiteRow {
+    background-color: white;
+}
