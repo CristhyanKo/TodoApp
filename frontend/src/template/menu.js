@@ -1,20 +1,18 @@
 import React from 'react'
+import { Menu, Icon,Row, Col } from 'antd';
 
 export default props => (
-    <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
-        <div className='container'>
-            <div className='navbar-header'>
-                <a className='navbar-brand' href="#">
-                    <i className='fa fa-calendar-check-o'></i> TodoApp
-                </a>
-            </div>
+    <Row>
+        <Col>
+            <Menu mode="horizontal" >
+                <Menu.Item>
+                    <a href="#/todos"><Icon type="form" /> Atividades</a>
+                </Menu.Item>
+                <Menu.Item>
+                    <a href="#/about"><Icon type="bulb" /> Sobre</a>
+                </Menu.Item>
+            </Menu>
+        </Col>
+    </Row>
 
-            <div id='navbar' className='collapse navbar-collapse'>
-                <ul className='navbar-nav'>
-                    <li className='nav-item'><a className='nav-link' href='#/todos'>Tarefas</a></li>
-                    <li className='nav-item'><a className='nav-link' href='#/about'>Sobre</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 )
