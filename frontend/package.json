@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack-dev-server --progress --colors --inline --hot --mode development --open",
+    "production": "webpack --progress -p"
   },
   "keywords": [],
   "author": "",
@@ -12,10 +13,12 @@
   "devDependencies": {
     "axios": "^0.18.0",
     "babel": "^6.23.0",
-    "babel-loader": "^8.0.4",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
     "babel-plugin-react-html-attrs": "^2.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-es": "^1.0.0",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "bootstrap": "^4.1.3",
     "css-loader": "^2.0.0",
